@@ -1,0 +1,417 @@
+/* Global Styles & CSS Variables */
+:root {
+  /* Light Theme (Default) */
+  --bg-color: #f4f7f9;
+  --text-color: #333;
+  --app-bg-color: #fff;
+  --app-shadow-color: rgba(0,0,0,0.1);
+  --header-color: #2c3e50;
+
+  --control-bg-color: #f8f9fa;
+  --control-text-color: #333; /* For text inside controls if any, besides buttons */
+
+  --button-border-color: #ced4da;
+  --button-bg-color: white;
+  --button-text-color-main: #212529; /* For regular buttons like duration */
+  --button-hover-bg-color: #e9ecef;
+  --button-hover-border-color: #adb5bd;
+
+  --button-active-bg-color: #007bff;
+  --button-active-text-color: white;
+  --button-active-border-color: #007bff;
+
+  --restart-button-bg-color: #28a745;
+  --restart-button-text-color: white;
+  --restart-button-hover-bg-color: #218838;
+
+  --theme-button-bg-color: #6c757d; /* Default theme button styling */
+  --theme-button-text-color: white;
+  --theme-button-hover-bg-color: #5a6268;
+
+  --timer-text-color: #007bff;
+
+  --text-display-bg-color: #fff;
+  --text-display-border-color: #dee2e6;
+  --text-display-text-color: #212529; /* Default text color inside text display */
+
+  --char-pending-color: #6c757d;
+  --char-correct-color: #28a745;
+  --char-incorrect-color: #dc3545;
+  --char-incorrect-bg-color: #f8d7da;
+  --char-current-bg-color: #cce7ff;
+  --char-current-text-color: #004085; /* Text color for current char if needed */
+
+  --input-bg-color: #fff;
+  --input-border-color: #ced4da;
+  --input-text-color: #495057;
+
+  --stats-bg-color: #e9ecef;
+  --stats-header-color: #495057;
+  --stats-text-color: #343a40;
+  --stats-border-color: #dee2e6;
+}
+
+body[data-theme="dark"] {
+  --bg-color: #23272f; /* Darker background */
+  --text-color: #ecf0f1; /* Light grey/white text */
+  --app-bg-color: #2c3e50; /* Dark blue/grey for app container */
+  --app-shadow-color: rgba(0,0,0,0.4);
+  --header-color: #ecf0f1;
+
+  --control-bg-color: #34495e; /* Darker controls background */
+  --control-text-color: #ecf0f1;
+
+  --button-border-color: #566573;
+  --button-bg-color: #455a64;
+  --button-text-color-main: #ecf0f1;
+  --button-hover-bg-color: #546e7a;
+  --button-hover-border-color: #78909c;
+
+  --button-active-bg-color: #5dade2; /* Brighter blue for dark mode active */
+  --button-active-text-color: #17202a;
+  --button-active-border-color: #5dade2;
+
+  --restart-button-bg-color: #2ecc71; /* Brighter green for dark mode */
+  --restart-button-text-color: #17202a;
+  --restart-button-hover-bg-color: #27ae60;
+
+  --theme-button-bg-color: #566573;
+  --theme-button-text-color: #ecf0f1;
+  --theme-button-hover-bg-color: #78909c;
+
+  --timer-text-color: #5dade2; /* Lighter blue for timer in dark mode */
+
+  --text-display-bg-color: #34495e; /* Dark background for text display */
+  --text-display-border-color: #4a6572;
+  --text-display-text-color: #ecf0f1;
+
+  --char-pending-color: #95a5a6; /* Lighter grey for pending in dark */
+  --char-correct-color: #2ecc71; /* Brighter green */
+  --char-incorrect-color: #e74c3c; /* Red can stay similar */
+  --char-incorrect-bg-color: #78281f; /* Darker red background */
+  --char-current-bg-color: #528baf; /* Darker blue for current */
+  --char-current-text-color: #ecf0f1;
+
+  --input-bg-color: #455a64;
+  --input-border-color: #566573;
+  --input-text-color: #ecf0f1;
+
+  --stats-bg-color: #34495e;
+  --stats-header-color: #ecf0f1;
+  --stats-text-color: #bdc3c7;
+  --stats-border-color: #4a6572;
+}
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.6;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  transition: background-color 0.3s, color 0.3s; /* Smooth theme transition */
+}
+
+.App {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: var(--app-bg-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 15px var(--app-shadow-color);
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.App > h1 {
+  text-align: center;
+  color: var(--header-color);
+  margin-bottom: 30px;
+  font-size: 2.2em;
+}
+
+/* Controls Styling */
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin-bottom: 25px;
+  background-color: var(--control-bg-color);
+  color: var(--control-text-color); /* Text inside controls */
+  border-radius: 6px;
+  flex-wrap: wrap;
+  gap: 10px;
+  transition: background-color 0.3s;
+}
+
+.timer {
+  font-size: 1.6em;
+  font-weight: bold;
+  color: var(--timer-text-color);
+}
+
+.duration-options {
+  display: flex;
+  gap: 8px;
+}
+
+.duration-options button {
+  padding: 8px 12px;
+  border: 1px solid var(--button-border-color);
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color-main);
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.duration-options button:hover {
+  background-color: var(--button-hover-bg-color);
+  border-color: var(--button-hover-border-color);
+}
+
+.duration-options button.active {
+  background-color: var(--button-active-bg-color);
+  color: var(--button-active-text-color);
+  border-color: var(--button-active-border-color);
+}
+
+.duration-options button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+  background-color: var(--button-hover-bg-color); /* Use hover color for disabled */
+}
+
+.restart-button {
+  padding: 10px 18px;
+  background-color: var(--restart-button-bg-color);
+  color: var(--restart-button-text-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.2s;
+}
+
+.restart-button:hover {
+  background-color: var(--restart-button-hover-bg-color);
+}
+
+.theme-toggle-button {
+  padding: 10px 18px; /* Consistent with restart button */
+  background-color: var(--theme-button-bg-color);
+  color: var(--theme-button-text-color);
+  border: 1px solid var(--button-border-color); /* Use standard border */
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em; /* Consistent font size */
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.theme-toggle-button:hover {
+  background-color: var(--theme-button-hover-bg-color);
+}
+
+
+/* TypingTest Styling */
+.typing-test {
+  margin-bottom: 25px;
+}
+
+.text-display {
+  margin-bottom: 15px;
+  font-size: 1.6em;
+  line-height: 1.7;
+  padding: 20px;
+  border: 1px solid var(--text-display-border-color);
+  border-radius: 6px;
+  background-color: var(--text-display-bg-color);
+  color: var(--text-display-text-color); /* For the actual text characters if not overridden by spans */
+  text-align: left;
+  min-height: 100px;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.char-pending {
+  color: var(--char-pending-color);
+}
+
+.char-correct {
+  color: var(--char-correct-color);
+}
+
+.char-incorrect {
+  color: var(--char-incorrect-color);
+  background-color: var(--char-incorrect-bg-color);
+  text-decoration: none;
+  border-radius: 2px;
+  padding: 1px 0;
+}
+.char-incorrect.space-char {
+  background-color: var(--char-incorrect-bg-color);
+  text-decoration: none;
+}
+
+
+.char-current {
+  background-color: var(--char-current-bg-color);
+  color: var(--char-current-text-color); /* Ensure text is visible on current bg */
+  border-radius: 2px;
+  padding: 1px 0;
+}
+.char-current.space-char {
+   background-color: var(--char-current-bg-color);
+}
+
+
+.typing-test input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1em;
+  border: 1px solid var(--input-border-color);
+  background-color: var(--input-bg-color);
+  color: var(--input-text-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+/* Stats Display Styling */
+.stats-display {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid var(--stats-border-color);
+  border-radius: 6px;
+  background-color: var(--stats-bg-color);
+  text-align: left;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.stats-display h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: var(--stats-header-color);
+  font-size: 1.8em;
+}
+
+.stats-display p {
+  font-size: 1.1em;
+  margin-bottom: 8px;
+  color: var(--stats-text-color);
+}
+.stats-display p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* Media Query for Responsiveness */
+@media (max-width: 768px) {
+  .App {
+    padding: 15px;
+  }
+  .App > h1 {
+    font-size: 2em;
+    margin-bottom: 25px;
+  }
+  .controls {
+    padding: 10px;
+  }
+  .timer {
+    font-size: 1.4em;
+  }
+  .text-display {
+    font-size: 1.4em;
+    padding: 15px;
+  }
+  .theme-toggle-button, .restart-button, .duration-options button {
+    padding: 8px 10px; /* Adjust padding for all buttons in controls */
+    font-size: 0.9em;
+  }
+}
+
+
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+  .App {
+    padding: 10px;
+    border-radius: 6px;
+  }
+  .App > h1 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+  }
+
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .controls .duration-options {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 0;
+  }
+   .controls .theme-toggle-button, .controls .restart-button { /* Ensure toggle button also takes full width */
+    width: 100%;
+    padding: 12px;
+  }
+  .timer {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 5px;
+    font-size: 1.5em;
+  }
+
+  .text-display {
+    font-size: 1.25em;
+    padding: 12px;
+    line-height: 1.6;
+    min-height: 80px;
+  }
+  .typing-test input[type="text"] {
+    font-size: 1em;
+    padding: 10px;
+  }
+
+  .stats-display {
+    padding: 15px;
+  }
+  .stats-display h2 {
+    font-size: 1.6em;
+  }
+  .stats-display p {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 400px) {
+  .App > h1 {
+    font-size: 1.6em;
+  }
+  .text-display {
+    font-size: 1.1em;
+  }
+  .duration-options button {
+    padding: 6px 8px;
+    font-size: 0.9em;
+  }
+   .controls .theme-toggle-button, .controls .restart-button {
+    font-size: 0.95em; /* Slightly smaller font for full width buttons */
+    padding: 10px;
+  }
+  .timer {
+    font-size: 1.3em;
+  }
+}
